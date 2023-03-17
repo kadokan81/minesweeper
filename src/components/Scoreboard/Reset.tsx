@@ -34,4 +34,5 @@ const Button = styled.button`
 	border-style: solid;
 	background-color: #d1d1d1;
 	border-color: white #9e9e9e #9e9e9e white;
+	padding: 0.3vw 0.5vw;
 `;

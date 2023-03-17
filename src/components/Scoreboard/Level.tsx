@@ -25,6 +25,7 @@ const Select = styled.select`
 	border: 0.15vw solid;
 	border-color: white #9e9e9e #9e9e9e white;
 	background-color: #d1d1d1;
+	padding: 0.4vw 0.3vw;
 `;
 
 const Option = styled.option`
