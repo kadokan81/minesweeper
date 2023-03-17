@@ -1,10 +1,7 @@
-import React from 'react';
-
 import { Story, Meta } from '@storybook/react';
 import { Legend } from './Legend';
 
 export default {
-	// test comments
 	title: 'Top/Legend',
 	component: Legend,
 } as Meta;
