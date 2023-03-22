@@ -6,8 +6,8 @@ export const CellState: Record<string, Cell> = {
 	empty: 0,
 	bomb: 9,
 	hidden: 10,
-	mark: 11,
-	weakMark: 12,
+	flag: 11,
+	weakFlag: 12,
 };
 export type Coords = [number, number];
 

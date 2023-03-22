@@ -1,6 +1,5 @@
 import './App.css';
-import { Legend } from './components/Top/Legend';
-import { GameName } from './components/Top/GameName';
+
 import { Top } from './components/Top';
 import { Scoreboard } from './components/Scoreboard';
 
