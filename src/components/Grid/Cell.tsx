@@ -50,7 +50,7 @@ export const Cell: FC<CellProps> = ({ children, coords, ...rest }) => {
 		onMouseUp,
 		onMouseLeave: onMouseUp,
 		mouseDown,
-		'data-testid': `${coords}`,
+		'data-testid': `${coords}` /* cspell: disable-line */,
 		role: 'cell',
 	};
 
@@ -65,7 +65,7 @@ interface ComponentsMapProps {
 	onMouseUp: () => void;
 	onMouseLeave: () => void;
 	mouseDown: boolean;
-	'data-testid'?: string /* cspell: disable-line */;
+	'data-testid'?: string;
 	role: string;
 }
 
@@ -116,7 +116,7 @@ export const ClosedFrame = styled.div<ClosedFrameProps>`
 	height: 1.8vw;
 	color: transparent;
 	background-color: #d1d1d1;
-	border: 0.6vh solid transparent;
+	border: 0.3vh solid transparent;
 	border-color: ${({ mouseDown = false }) =>
 		mouseDown ? 'transparent' : 'white #9e9e9e #9e9e9e white'};
 	&:hover {
