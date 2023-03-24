@@ -3,7 +3,7 @@
 exports[`Cell component check Cell renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="css-vj5iaq"
+    class="css-as18fm"
     data-testid="1,1"
     role="cell"
   >
@@ -15,7 +15,7 @@ exports[`Cell component check Cell renders correctly 1`] = `
 exports[`Cell component check Cell renders correctly 2`] = `
 <DocumentFragment>
   <div
-    class="css-alq9uu"
+    class="css-167dcoj"
     data-testid="1,1"
     role="cell"
   >
@@ -27,7 +27,7 @@ exports[`Cell component check Cell renders correctly 2`] = `
 exports[`Cell component check Cell renders correctly 3`] = `
 <DocumentFragment>
   <div
-    class="css-1lm0fh"
+    class="css-1mps1k1"
     data-testid="1,1"
     role="cell"
   >
@@ -39,7 +39,7 @@ exports[`Cell component check Cell renders correctly 3`] = `
 exports[`Cell component check Cell renders correctly 4`] = `
 <DocumentFragment>
   <div
-    class="css-z33ftt"
+    class="css-1pjq47j"
     data-testid="1,1"
     role="cell"
   >
@@ -51,7 +51,7 @@ exports[`Cell component check Cell renders correctly 4`] = `
 exports[`Cell component check Cell renders correctly 5`] = `
 <DocumentFragment>
   <div
-    class="css-8qrmpi"
+    class="css-bgr334"
     data-testid="1,1"
     role="cell"
   >
@@ -63,7 +63,7 @@ exports[`Cell component check Cell renders correctly 5`] = `
 exports[`Cell component check Cell renders correctly 6`] = `
 <DocumentFragment>
   <div
-    class="css-hztl42"
+    class="css-1c7rstn"
     data-testid="1,1"
     role="cell"
   >
@@ -75,7 +75,7 @@ exports[`Cell component check Cell renders correctly 6`] = `
 exports[`Cell component check Cell renders correctly 7`] = `
 <DocumentFragment>
   <div
-    class="css-e18c1l"
+    class="css-14vm4uv"
     data-testid="1,1"
     role="cell"
   >
@@ -87,7 +87,7 @@ exports[`Cell component check Cell renders correctly 7`] = `
 exports[`Cell component check Cell renders correctly 8`] = `
 <DocumentFragment>
   <div
-    class="css-1nqv6f8"
+    class="css-fud02n"
     data-testid="1,1"
     role="cell"
   >
@@ -99,7 +99,7 @@ exports[`Cell component check Cell renders correctly 8`] = `
 exports[`Cell component check Cell renders correctly 9`] = `
 <DocumentFragment>
   <div
-    class="css-ltxtcq"
+    class="css-1k0gpm9"
     data-testid="1,1"
     role="cell"
   >
@@ -111,7 +111,7 @@ exports[`Cell component check Cell renders correctly 9`] = `
 exports[`Cell component check Cell renders correctly 10`] = `
 <DocumentFragment>
   <div
-    class="css-1eb9dt0"
+    class="css-1wdju5d"
     data-testid="1,1"
     role="cell"
   >
@@ -126,7 +126,7 @@ exports[`Cell component check Cell renders correctly 10`] = `
 exports[`Cell component check Cell renders correctly 11`] = `
 <DocumentFragment>
   <div
-    class="css-1p3mxo"
+    class="css-1y3osw2"
     data-testid="1,1"
     role="cell"
   >
@@ -138,7 +138,7 @@ exports[`Cell component check Cell renders correctly 11`] = `
 exports[`Cell component check Cell renders correctly 12`] = `
 <DocumentFragment>
   <div
-    class="css-1p3mxo"
+    class="css-1y3osw2"
     data-testid="1,1"
     role="cell"
   >
@@ -155,7 +155,7 @@ exports[`Cell component check Cell renders correctly 12`] = `
 exports[`Cell component check Cell renders correctly 13`] = `
 <DocumentFragment>
   <div
-    class="css-1p3mxo"
+    class="css-1y3osw2"
     data-testid="1,1"
     role="cell"
   >
@@ -170,7 +170,7 @@ exports[`Cell component check Cell renders correctly 13`] = `
 exports[`Cell component check Closed Frame renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -178,7 +178,7 @@ exports[`Cell component check Closed Frame renders correctly 1`] = `
 exports[`Cell component check Closed Frame renders correctly 2`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -186,7 +186,7 @@ exports[`Cell component check Closed Frame renders correctly 2`] = `
 exports[`Cell component check Closed Frame renders correctly 3`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -194,7 +194,7 @@ exports[`Cell component check Closed Frame renders correctly 3`] = `
 exports[`Cell component check Closed Frame renders correctly 4`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -202,7 +202,7 @@ exports[`Cell component check Closed Frame renders correctly 4`] = `
 exports[`Cell component check Closed Frame renders correctly 5`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -210,7 +210,7 @@ exports[`Cell component check Closed Frame renders correctly 5`] = `
 exports[`Cell component check Closed Frame renders correctly 6`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -218,7 +218,7 @@ exports[`Cell component check Closed Frame renders correctly 6`] = `
 exports[`Cell component check Closed Frame renders correctly 7`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -226,7 +226,7 @@ exports[`Cell component check Closed Frame renders correctly 7`] = `
 exports[`Cell component check Closed Frame renders correctly 8`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -234,7 +234,7 @@ exports[`Cell component check Closed Frame renders correctly 8`] = `
 exports[`Cell component check Closed Frame renders correctly 9`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -242,7 +242,7 @@ exports[`Cell component check Closed Frame renders correctly 9`] = `
 exports[`Cell component check Closed Frame renders correctly 10`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -250,7 +250,7 @@ exports[`Cell component check Closed Frame renders correctly 10`] = `
 exports[`Cell component check Closed Frame renders correctly 11`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -258,7 +258,7 @@ exports[`Cell component check Closed Frame renders correctly 11`] = `
 exports[`Cell component check Closed Frame renders correctly 12`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
@@ -266,7 +266,7 @@ exports[`Cell component check Closed Frame renders correctly 12`] = `
 exports[`Cell component check Closed Frame renders correctly 13`] = `
 <DocumentFragment>
   <div
-    class="css-1vlfahn"
+    class="css-1yyrkls"
   />
 </DocumentFragment>
 `;
