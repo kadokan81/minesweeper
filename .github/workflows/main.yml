@@ -6,10 +6,10 @@ name: auto_check
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [main]
   pull_request:
-    branches: [ master ]
-  
+    branches: [main]
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -24,7 +24,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
-            fetch-depth: 0
+          fetch-depth: 0
 
       # Install deps
       - name: Install npm deps
@@ -37,7 +37,7 @@ jobs:
       # Run project linter
       - name: Tests
         run: npm run lint
-        
+
       # Run build
       - name: Build
         run: npm run build
