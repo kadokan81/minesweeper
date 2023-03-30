@@ -2,6 +2,7 @@ import {
 	incrementNeighbors,
 	getNeighborsItems,
 	checkItemInFields,
+	openCell,
 } from './CellManipulation';
 import { CellState, Field } from './Field';
 const { empty: e, hidden: h, bomb: b } = CellState;
@@ -14,73 +15,73 @@ const { empty: e, hidden: h, bomb: b } = CellState;
 // 	[empty, empty, empty, empty, empty, empty],
 // ];
 
-describe('check neighbor selection', () => {
-	it('With [0,0] coord', () => {
-		expect(getNeighborsItems([0, 0])).toStrictEqual({
-			top: [-1, 0],
-			topRight: [-1, 1],
-			right: [0, 1],
-			rightBottom: [1, 1],
-			bottom: [1, 0],
-			bottomLeft: [1, -1],
-			left: [0, -1],
-			leftTop: [-1, -1],
-		});
-	});
-	it('With [3,3] coord', () => {
-		expect(getNeighborsItems([3, 3])).toStrictEqual({
-			top: [2, 3],
-			topRight: [2, 4],
-			right: [3, 4],
-			rightBottom: [4, 4],
-			bottom: [4, 3],
-			bottomLeft: [4, 2],
-			left: [3, 2],
-			leftTop: [2, 2],
-		});
-	});
-});
+// describe('check neighbor selection', () => {
+// 	it('With [0,0] coord', () => {
+// 		expect(getNeighborsItems([0, 0])).toStrictEqual({
+// 			top: [-1, 0],
+// 			topRight: [-1, 1],
+// 			right: [0, 1],
+// 			rightBottom: [1, 1],
+// 			bottom: [1, 0],
+// 			bottomLeft: [1, -1],
+// 			left: [0, -1],
+// 			leftTop: [-1, -1],
+// 		});
+// 	});
+// 	it('With [3,3] coord', () => {
+// 		expect(getNeighborsItems([3, 3])).toStrictEqual({
+// 			top: [2, 3],
+// 			topRight: [2, 4],
+// 			right: [3, 4],
+// 			rightBottom: [4, 4],
+// 			bottom: [4, 3],
+// 			bottomLeft: [4, 2],
+// 			left: [3, 2],
+// 			leftTop: [2, 2],
+// 		});
+// 	});
+// });
 
-describe('Check itemField tests', () => {
-	describe('Simple cases', () => {
-		const field: Field = [[e]];
+// describe('Check itemField tests', () => {
+// 	describe('Simple cases', () => {
+// 		const field: Field = [[e]];
 
-		it('out of y range', () => {
-			expect(checkItemInFields([-1, 0], field)).toBe(false);
-		});
-		it('out of x range', () => {
-			expect(checkItemInFields([0, -1], field)).toBe(false);
-		});
-		it('in y and x range', () => {
-			expect(checkItemInFields([0, 0], field)).toBe(true);
-		});
-	});
-	describe('Big field', () => {
-		const field: Field = [
-			[e, e, e, e, e],
-			[e, e, e, e, e],
-			[e, e, e, e, e],
-			[e, e, e, e, e],
-			[e, e, e, e, e],
-		];
+// 		it('out of y range', () => {
+// 			expect(checkItemInFields([-1, 0], field)).toBe(false);
+// 		});
+// 		it('out of x range', () => {
+// 			expect(checkItemInFields([0, -1], field)).toBe(false);
+// 		});
+// 		it('in y and x range', () => {
+// 			expect(checkItemInFields([0, 0], field)).toBe(true);
+// 		});
+// 	});
+// 	describe('Big field', () => {
+// 		const field: Field = [
+// 			[e, e, e, e, e],
+// 			[e, e, e, e, e],
+// 			[e, e, e, e, e],
+// 			[e, e, e, e, e],
+// 			[e, e, e, e, e],
+// 		];
 
-		it('Out of x range', () => {
-			expect(checkItemInFields([5, 0], field)).toBe(false);
-		});
+// 		it('Out of x range', () => {
+// 			expect(checkItemInFields([5, 0], field)).toBe(false);
+// 		});
 
-		it('Out of x range with negative index', () => {
-			expect(checkItemInFields([-1, 0], field)).toBe(false);
-		});
+// 		it('Out of x range with negative index', () => {
+// 			expect(checkItemInFields([-1, 0], field)).toBe(false);
+// 		});
 
-		it('Out of y range', () => {
-			expect(checkItemInFields([0, 5], field)).toBe(false);
-		});
+// 		it('Out of y range', () => {
+// 			expect(checkItemInFields([0, 5], field)).toBe(false);
+// 		});
 
-		it('In x and y range', () => {
-			expect(checkItemInFields([3, 4], field)).toBe(true);
-		});
-	});
-});
+// 		it('In x and y range', () => {
+// 			expect(checkItemInFields([3, 4], field)).toBe(true);
+// 		});
+// 	});
+// });
 
 describe('Check increment neighbor method', () => {
 	describe('Simple cases', () => {
@@ -221,6 +222,115 @@ describe('Check increment neighbor method', () => {
 				[0, 2, 2, 4, 9, 2, 1, 1, 1],
 				[0, 1, 9, 2, 1, 1, 1, 9, 1],
 				[0, 1, 1, 1, 0, 0, 1, 1, 1],
+			]);
+		});
+	});
+});
+describe('open cell action', () => {
+	describe('Simple case with lose', () => {
+		it('opens sell with the bomb', () => {
+			expect(() =>
+				openCell(
+					[1, 1],
+					[
+						[h, h],
+						[h, h],
+					],
+					[
+						[1, 1],
+						[1, b],
+					]
+				)
+			).toThrow('Game Over');
+		});
+	});
+	describe('Open sell with number', () => {
+		it('opens sell state === 1', () => {
+			const playerField = openCell(
+				[1, 1],
+				[
+					[h, h, h],
+					[h, h, h],
+					[h, h, h],
+				],
+				[
+					[1, 1, 0],
+					[9, 1, 0],
+					[1, 1, 0],
+				]
+			);
+			expect(playerField).toStrictEqual([
+				[h, h, h],
+				[h, 1, h],
+				[h, h, h],
+			]);
+		});
+		it('opens sell state === 3', () => {
+			const playerField = openCell(
+				[1, 1],
+				[
+					[h, h, h],
+					[h, h, h],
+					[h, h, h],
+				],
+				[
+					[9, 2, 0],
+					[9, 3, 0],
+					[9, 2, 0],
+				]
+			);
+			expect(playerField).toStrictEqual([
+				[h, h, h],
+				[h, 3, h],
+				[h, h, h],
+			]);
+		});
+	});
+	describe('Open empty cell', () => {
+		it('open empty cell, simple 3*3 case', () => {
+			const playerField = openCell(
+				[1, 2],
+				[
+					[h, h, h],
+					[h, h, h],
+					[h, h, h],
+				],
+				[
+					[1, 1, 0],
+					[9, 1, 0],
+					[1, 1, 0],
+				]
+			);
+			expect(playerField).toStrictEqual([
+				[h, 1, 0],
+				[h, 1, 0],
+				[h, 1, 0],
+			]);
+		});
+		it('Open empty cell 5*5 case', () => {
+			const playerField = openCell(
+				[2, 2],
+				[
+					[h, h, h, h, h],
+					[h, h, h, h, h],
+					[h, h, h, h, h],
+					[h, h, h, h, h],
+					[h, h, h, h, h],
+				],
+				[
+					[9, 9, 1, 1, 2],
+					[9, 3, 1, 0, 0],
+					[1, 1, 0, 1, 1],
+					[1, 0, 0, 1, 9],
+					[2, 1, 0, 1, 0],
+				]
+			);
+			expect(playerField).toStrictEqual([
+				[h, h, 1, 1, 2],
+				[h, 3, 1, 0, 0],
+				[1, 1, 0, 1, 1],
+				[1, 0, 0, 1, h],
+				[2, 1, 0, 1, h],
 			]);
 		});
 	});

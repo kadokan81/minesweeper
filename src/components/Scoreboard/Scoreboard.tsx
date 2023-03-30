@@ -1,37 +1,45 @@
 import styled from '@emotion/styled';
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { Counter } from './Counter';
 import { Level } from './Level';
 import { Reset } from './Reset';
 
 export interface ScoreboardProps {
 	levels: string[];
+	defaultLevel: string;
 
 	time: string;
 
 	mines: string;
 	onReset: () => void;
+	onChangeLevel: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export const Scoreboard: FC<ScoreboardProps> = ({
 	time,
 	levels,
+	defaultLevel,
 	mines,
 	onReset,
+	onChangeLevel: onChange,
 }) => (
 	<Wrapper>
 		<Counter>{time}</Counter>
-		<Level>{levels}</Level>
-		<Reset onReset={onReset} />
+		<div style={{ display: 'flex ', gap: '20px' }}>
+			<Level value={defaultLevel} onChange={onChange}>
+				{levels}
+			</Level>
+			<Reset onReset={onReset} />
+		</div>
+
 		<Counter>{mines}</Counter>
 	</Wrapper>
 );
 
 const Wrapper = styled.div`
 	display: flex;
-	gap: 0.5em;
-	width: max-content;
-	padding-bottom: 2vw;
+	gap: 4vw;
 	justify-content: space-between;
-	align-items: center;
+
+	padding-bottom: 2vw;
 `;
