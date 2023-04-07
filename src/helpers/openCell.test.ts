@@ -22,7 +22,7 @@ describe('open cell action', () => {
 	});
 	describe('Open sell with number', () => {
 		it('opens sell state === 1', () => {
-			const playerField = openCell(
+			const [playerField] = openCell(
 				[1, 1],
 				[
 					[h, h, h],
@@ -42,7 +42,7 @@ describe('open cell action', () => {
 			]);
 		});
 		it('opens sell state === 3', () => {
-			const playerField = openCell(
+			const [playerField] = openCell(
 				[1, 1],
 				[
 					[h, h, h],
@@ -64,7 +64,7 @@ describe('open cell action', () => {
 	});
 	describe('Open empty cell', () => {
 		it('open empty cell, simple 3*3 case', () => {
-			const playerField = openCell(
+			const [playerField] = openCell(
 				[1, 2],
 				[
 					[h, h, h],
@@ -84,7 +84,7 @@ describe('open cell action', () => {
 			]);
 		});
 		it('Open empty cell 5*5 case', () => {
-			const playerField = openCell(
+			const [playerField] = openCell(
 				[2, 2],
 				[
 					[h, h, h, h, h],

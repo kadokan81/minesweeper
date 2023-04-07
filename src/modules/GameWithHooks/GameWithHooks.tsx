@@ -19,6 +19,8 @@ export const GameWithHooks: FC = () => {
 		onClick,
 		onChangeLevel,
 		onReset,
+		onContextMenu,
+		time,
 	} = useGame();
 
 	const [, bombs] = settings;
@@ -28,7 +30,7 @@ export const GameWithHooks: FC = () => {
 			<Top />
 			<GameArea>
 				<Scoreboard
-					time='1200'
+					time={String(time)}
 					mines={bombs + ''}
 					levels={GameLevel as unknown as string[]}
 					defaultLevel={level}
@@ -38,7 +40,7 @@ export const GameWithHooks: FC = () => {
 					onReset={onReset}
 				/>
 				{gameIsOver && <GameOver onClick={onReset} isWin={isWin} />}
-				<Grid onClick={onClick} onContextMenu={() => {}}>
+				<Grid onClick={onClick} onContextMenu={onContextMenu}>
 					{playerField}
 				</Grid>
 			</GameArea>

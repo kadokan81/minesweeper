@@ -3,6 +3,7 @@ import {
 	checkItemInFields,
 	getNeighborsItems,
 } from './CellManipulation';
+import { detectSolvePassel } from './detectSolvePassel';
 import { Coords, Field } from './Field';
 
 const { empty, hidden, bomb } = CellState;
@@ -11,7 +12,7 @@ export const openCell = (
 	coords: Coords,
 	playerField: Field,
 	gameField: Field
-): Field => {
+): [Field, boolean, number] => {
 	const [y, x] = coords;
 	const gameCell = gameField[y][x];
 	if (gameCell === bomb) {
@@ -27,7 +28,7 @@ export const openCell = (
 				const playerCell = playerField[y][x];
 
 				if (gameCell === empty && playerCell === hidden) {
-					playerField = openCell(coords, playerField, gameField);
+					[playerField] = openCell(coords, playerField, gameField);
 				}
 
 				if (gameCell < bomb) {
@@ -38,5 +39,7 @@ export const openCell = (
 	}
 	playerField[y][x] = gameCell;
 
-	return playerField;
+	const [isSolved, flagCounter] = detectSolvePassel(playerField, gameField);
+
+	return [playerField, isSolved, flagCounter];
 };

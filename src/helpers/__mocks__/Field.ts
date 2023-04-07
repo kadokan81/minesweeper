@@ -1,5 +1,3 @@
-jest.requireActual('../Field');
-
 export const fieldGenerator = (size: number) => {
 	switch (size) {
 		case 9:

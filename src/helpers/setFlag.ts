@@ -1,3 +1,4 @@
+import { detectSolvePassel } from './detectSolvePassel';
 import { CellState } from './CellManipulation';
 import { Coords, Field } from './Field';
 
@@ -5,7 +6,7 @@ export const setFlag = (
 	coords: Coords,
 	playerField: Field,
 	gameField: Field
-): Field => {
+): [Field, boolean, number] => {
 	const [y, x] = coords;
 	const cell = playerField[y][x];
 
@@ -25,5 +26,7 @@ export const setFlag = (
 			break;
 	}
 
-	return playerField;
+	const [isSolved, flagCounter] = detectSolvePassel(playerField, gameField);
+
+	return [playerField, isSolved, flagCounter];
 };
