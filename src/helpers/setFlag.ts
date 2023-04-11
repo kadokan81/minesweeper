@@ -5,7 +5,9 @@ import { Coords, Field } from './Field';
 export const setFlag = (
 	coords: Coords,
 	playerField: Field,
-	gameField: Field
+	gameField: Field,
+	prevFlagCounter: number,
+	bombs: number
 ): [Field, boolean, number] => {
 	const [y, x] = coords;
 	const cell = playerField[y][x];
@@ -20,7 +22,9 @@ export const setFlag = (
 			playerField[y][x] = hidden;
 			break;
 		case hidden:
-			playerField[y][x] = flag;
+			if (prevFlagCounter < bombs) {
+				playerField[y][x] = flag;
+			}
 			break;
 		default:
 			break;

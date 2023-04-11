@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, memo } from 'react';
 
 export interface LevelProps {
 	/**
@@ -10,7 +10,7 @@ export interface LevelProps {
 	onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const Level: FC<LevelProps> = ({ children, value, onChange }) => (
+export const Level: FC<LevelProps> = memo(({ children, value, onChange }) => (
 	<Select onChange={onChange} value={value}>
 		{children.map((item: string) => (
 			<Option key={item} value={item}>
@@ -18,7 +18,8 @@ export const Level: FC<LevelProps> = ({ children, value, onChange }) => (
 			</Option>
 		))}
 	</Select>
-);
+));
+Level.displayName = 'Level';
 
 const Select = styled.select`
 	margin: 0;

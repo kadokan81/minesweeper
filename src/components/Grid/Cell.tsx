@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import styled from '@emotion/styled';
 
 import { Cell as CellType, Coords, CellState } from '../../helpers/Field';
 
 import { useMouseDown } from '../../hooks/UseMouseDown';
+import { log } from 'console';
 
 export interface CellProps {
 	/**
@@ -26,36 +27,6 @@ export interface CellProps {
 
 export const isActiveCell = (cell: CellType): boolean =>
 	[CellState.hidden, CellState.flag, CellState.weakFlag].includes(cell);
-
-export const Cell: FC<CellProps> = ({ children, coords, ...rest }) => {
-	const [mouseDown, onMouseDown, onMouseUp] = useMouseDown();
-
-	const onClick = () => rest.onClick(coords);
-
-	const onContextMenu = (event: React.MouseEvent<HTMLDivElement>) => {
-		/**
-		 * Prevent context menu by default
-		 */
-		event.preventDefault();
-
-		if (isActiveCell(children)) {
-			rest.onContextMenu(coords);
-		}
-	};
-
-	const props = {
-		onClick,
-		onContextMenu,
-		onMouseDown,
-		onMouseUp,
-		onMouseLeave: onMouseUp,
-		mouseDown,
-		'data-testid': `${coords}` /* cspell: disable-line */,
-		role: 'cell',
-	};
-
-	return <ComponentsMap {...props}>{children}</ComponentsMap>;
-};
 
 interface ComponentsMapProps {
 	children: CellType;
@@ -106,12 +77,61 @@ interface ClosedFrameProps {
 	mouseDown?: boolean;
 }
 
+export const areEqual = (
+	prevProps: CellProps,
+	nextProps: CellProps
+): boolean => {
+	const areEqualCoords =
+		prevProps.coords.filter((coord, idx) => nextProps.coords[idx] !== coord)
+			.length === 0;
+
+	return (
+		prevProps.children === nextProps.children &&
+		areEqualCoords &&
+		prevProps.onClick === nextProps.onClick &&
+		prevProps.onContextMenu === nextProps.onContextMenu
+	);
+};
+
+export const Cell: FC<CellProps> = memo(({ children, coords, ...rest }) => {
+	const [mouseDown, onMouseDown, onMouseUp] = useMouseDown();
+
+	const onClick = () => rest.onClick(coords);
+
+	const onContextMenu = (event: React.MouseEvent<HTMLDivElement>) => {
+		/**
+		 * Prevent context menu by default
+		 */
+		event.preventDefault();
+
+		if (isActiveCell(children)) {
+			rest.onContextMenu(coords);
+		}
+	};
+
+	Cell.displayName = 'Cell';
+
+	const props = {
+		onClick,
+		onContextMenu,
+		onMouseDown,
+		onMouseUp,
+		onMouseLeave: onMouseUp,
+		mouseDown,
+		'data-testid': `${coords}` /* cspell: disable-line */,
+		role: 'cell',
+	};
+
+	return <ComponentsMap {...props}>{children}</ComponentsMap>;
+}, areEqual);
+
 export const ClosedFrame = styled.div<ClosedFrameProps>`
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	user-select: none;
 	cursor: pointer;
+	font-size: 0.8em;
 	width: 1.8vw;
 	height: 1.8vw;
 	color: transparent;

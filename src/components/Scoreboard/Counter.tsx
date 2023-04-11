@@ -1,17 +1,21 @@
 import styled from '@emotion/styled';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 export interface CounterProps {
 	children: string;
 }
 
-export const Counter: FC<CounterProps> = ({ children }) => (
+export const Counter: FC<CounterProps> = memo(({ children }) => (
 	<Frame>{children}</Frame>
-);
+));
 
 const Frame = styled.div`
-	display: inline-block;
-	padding: 0.2vw 0.3vw;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 50px;
+	padding: 0.2em;
+	font-size: 0.8em;
 	color: #ec433c;
 	border: 0.15vw inset;
 	line-height: 1.5vw;

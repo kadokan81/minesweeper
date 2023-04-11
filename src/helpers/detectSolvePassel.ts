@@ -5,6 +5,7 @@ export const detectSolvePassel = (
 	gameField: Field
 ): [boolean, number] => {
 	const { hidden, bomb, flag, weakFlag } = CellState;
+
 	let bombCounter = 0;
 	let flagCounter = 0;
 	let detectedBombCounter = 0;

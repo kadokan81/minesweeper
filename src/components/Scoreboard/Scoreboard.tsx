@@ -38,8 +38,8 @@ export const Scoreboard: FC<ScoreboardProps> = ({
 
 const Wrapper = styled.div`
 	display: flex;
-	gap: 4vw;
+	gap: 1em;
 	justify-content: space-between;
 
-	padding-bottom: 2vw;
+	padding-bottom: 0.5em;
 `;

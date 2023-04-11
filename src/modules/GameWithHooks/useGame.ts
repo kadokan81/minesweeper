@@ -4,12 +4,13 @@ import {
 	fieldGenerator,
 	Coords,
 } from './../../helpers/Field';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Field } from '../../helpers/Field';
 import { GameSettings, LevelNames } from './GameSettings';
 import { openCell } from '../../helpers/openCell';
 import { setFlag } from '../../helpers/setFlag';
 import { log } from 'console';
+import { useTime } from './useTime';
 
 type returnType = {
 	level: 'beginner' | 'intermediate' | 'expert';
@@ -18,6 +19,7 @@ type returnType = {
 	settings: number[];
 	playerField: Field;
 	gameField: Field;
+	flagCounter: number;
 	time: number;
 	onClick: (coords: Coords) => void;
 	onChangeLevel: (level: LevelNames) => void;
@@ -40,75 +42,68 @@ export const useGame = (): returnType => {
 		fieldGenerator(size, bombs / (size * size))
 	);
 
-	const [time, setTime] = useState(0);
-
-	useEffect(() => {
-		let interval: NodeJS.Timeout;
-		if (isGameStarted) {
-			interval = setInterval(() => {
-				setTime((time) => time + 1);
-			}, 1000);
-
-			if (gameIsOver) {
-				clearInterval(interval);
-			}
-		}
-
-		return () => {
-			clearInterval(interval);
-		};
-	}, [isGameStarted, gameIsOver, time]);
+	const [time, onResetTime] = useTime(isGameStarted, gameIsOver);
 
 	useMemo(() => console.log(gameField), [gameField]);
-	useMemo(() => console.log(time), [time]);
 
-	const onContextMenu = (coords: Coords) => {
-		!isGameStarted && setIsGameStarted(true);
+	const [flagCounter, setFlagCounter] = useState(0);
 
-		const [newPlayerField, isSolved, flagCounter] = setFlag(
-			coords,
-			playerField,
-			gameField
-		);
-		if (isSolved) {
-			setIsWin(isSolved);
-			setGAmeIsOver(isSolved);
-		}
-		setPlayerField([...newPlayerField]);
-	};
+	const onContextMenu = useCallback(
+		(coords: Coords) => {
+			!isGameStarted && setIsGameStarted(true);
 
-	const onReset = () => {
+			const [newPlayerField, isSolved, newFlagCounter] = setFlag(
+				coords,
+				playerField,
+				gameField,
+				flagCounter,
+				bombs
+			);
+			setFlagCounter(newFlagCounter);
+			if (isSolved) {
+				setIsWin(isSolved);
+				setGAmeIsOver(isSolved);
+			}
+			setPlayerField([...newPlayerField]);
+		},
+		[isGameStarted, gameIsOver, isWin, level, flagCounter]
+	);
+
+	const onReset = useCallback(() => {
 		const newGameField = fieldGenerator(size, bombs / (size * size));
 		const newPlayerField = emptyFieldGenerator(size, CellState.hidden);
 
 		setGameField([...newGameField]);
 		setPlayerField([...newPlayerField]);
 		setGAmeIsOver(false);
-		setTime(0);
+		onResetTime();
 		setIsGameStarted(false);
-	};
+	}, [size, bombs]);
 
-	const onClick = (coords: Coords) => {
-		!isGameStarted && setIsGameStarted(true);
+	const onClick = useCallback(
+		(coords: Coords) => {
+			!isGameStarted && setIsGameStarted(true);
 
-		try {
-			const [newPlayerField, isSolved, flagCounter] = openCell(
-				coords,
-				playerField,
-				gameField
-			);
+			try {
+				const [newPlayerField, isSolved, flagCounter] = openCell(
+					coords,
+					playerField,
+					gameField
+				);
 
-			if (isSolved) {
-				setIsWin(isSolved);
-				setGAmeIsOver(isSolved);
+				if (isSolved) {
+					setIsWin(isSolved);
+					setGAmeIsOver(isSolved);
+				}
+				setPlayerField([...newPlayerField]);
+			} catch {
+				setPlayerField([...gameField]);
+				setGAmeIsOver(true);
+				setIsWin(false);
 			}
-			setPlayerField([...newPlayerField]);
-		} catch {
-			setPlayerField([...gameField]);
-			setGAmeIsOver(true);
-			setIsWin(false);
-		}
-	};
+		},
+		[isGameStarted, gameIsOver, isWin, level, flagCounter]
+	);
 	const onChangeLevel = (level: LevelNames = 'beginner') => {
 		setLevel(level);
 
@@ -119,7 +114,7 @@ export const useGame = (): returnType => {
 		setGameField([...newGameField]);
 		setPlayerField([...newPlayerField]);
 		setGAmeIsOver(false);
-		setTime(0);
+		onResetTime();
 		setIsGameStarted(false);
 	};
 	return {
@@ -129,6 +124,7 @@ export const useGame = (): returnType => {
 		settings: [size, bombs],
 		playerField,
 		gameField,
+		flagCounter,
 		onClick,
 		onChangeLevel,
 		onReset,
